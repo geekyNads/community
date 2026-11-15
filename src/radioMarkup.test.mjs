@@ -275,7 +275,8 @@ test('no unchanged Realtime tool definition drifts silently', () => {
     .digest('hex')
     .slice(0, 16);
   // Analyst additions and ISS wording correction are explicitly excluded above; all other tool definitions retain their pin.
-  assert.equal(digest, '25d1b902ecaa22fb', 'an unchanged Realtime tool definition drifted');
+  // Re-derived for the Orbital Watch rename: set_visual_style's description names the app.
+  assert.equal(digest, '61644261992110a8', 'an unchanged Realtime tool definition drifted');
 });
 
 test('Radio volume and mission speed share the Sharpen slider visual language', () => {

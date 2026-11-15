@@ -6,13 +6,13 @@ import {
   rocketLaunchesProxy,
   launchLibraryRequestHeaders,
   LL2_CACHE_TTL_MS,
-} from 'gods-eye-view/server/providers/space';
+} from 'orbital-watch/server/providers/space';
 import {
   celestrakTleUrl,
   launchLibraryRecentUrl,
-} from 'gods-eye-view/sources/space';
+} from 'orbital-watch/sources/space';
 import * as compatibility from '../../server/providers/local.js';
-import { createLaunchSource } from 'gods-eye-view/layers/launches/source';
+import { createLaunchSource } from 'orbital-watch/layers/launches/source';
 
 function install(plugin, preview = false) {
   const routes = new Map();

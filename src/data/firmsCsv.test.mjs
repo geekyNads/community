@@ -9,7 +9,7 @@ import {
   filterTrailing24h,
   isLikelyCsv,
   parseFirmsCsv,
-} from 'gods-eye-view/sources/firms-csv';
+} from 'orbital-watch/sources/firms-csv';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const FIXTURE = fs.readFileSync(

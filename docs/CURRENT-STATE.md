@@ -1,4 +1,4 @@
-# God's Eye View Current State
+# Orbital Watch Current State
 
 Docker Compose mounts the checkout with the shared SELinux `:z` label so
 containers can read it on enforcing SELinux hosts. The separate image-owned
@@ -780,12 +780,12 @@ physical side as the cockpit's other windows do. The Cyber HUD and the phone
 keep their own cockpit layouts, with the Display and Radio launchers as
 before, and edge mode does not apply in the cockpit.
 
-## God's Eye View in conversations — October 2, 2026
+## Orbital Watch in conversations — October 2, 2026
 
-Tool answers that can be shown in God's Eye View include a view: camera, layers,
+Tool answers that can be shown in Orbital Watch include a view: camera, layers,
 style, map, marks and an aircraft or satellite to follow, written in the
-share-link format (`gods-eye-view/view`). `show_in_gods_eye_view` shows a view as live
-God's Eye View inside clients that display MCP Apps, and as a link everywhere.
+share-link format (`orbital-watch/view`). `show_in_gods_eye_view` shows a view as live
+Orbital Watch inside clients that display MCP Apps, and as a link everywhere.
 The panel runs the app's panel build (`npm run build:panel`, served at
 `/panel/`) and loads it, with its data, through the MCP server, so it works
 in Claude Desktop and in the Codex and ChatGPT desktop apps with a local
@@ -813,8 +813,8 @@ Tool argument string lengths follow JSON Schema Unicode code-point counts, so su
 
 Query timestamps outside the representable Date range are reported as null, preserving the rest of the result row.
 
-`gods-eye-view/tools` defines queries that answer questions from the app's data,
-and `gods-eye-view/tools/mcp` exposes a composed catalog over the Model Context
+`orbital-watch/tools` defines queries that answer questions from the app's data,
+and `orbital-watch/tools/mcp` exposes a composed catalog over the Model Context
 Protocol. `npm run mcp` serves Core's tools over stdio to a local MCP client,
 reading from a running app's `/api` routes (default `http://localhost:4173`).
 The development and preview servers also serve the tools over HTTP at `/mcp`,
@@ -1395,7 +1395,7 @@ and partial answers name the unanswered layers. `get_current_view_state` lists e
 FIRMS and ALPR entity labels remain English in shared context and tool data;
 voice-card titles and pointer presentation translate those known labels at display
 time, while arbitrary names and callsigns remain unchanged.
-The model-free `gods-eye-view/agent/world-packet` export exposes
+The model-free `orbital-watch/agent/world-packet` export exposes
 `getWorldPacket({ viewer, styleManager, dataManager, sceneDirector })` to
 non-voice consumers. It reads the same enabled-only state and feed
 provenance before voice adds speech/card fields, with no new network requests
@@ -1842,7 +1842,7 @@ sea-surface placement, click ownership and card selection policy are unchanged.
 
 ## Military-flight components and aircraft mechanics
 
-`gods-eye-view/layers/military` exports `createMilitaryFlightLayer`. It uses the
+`orbital-watch/layers/military` exports `createMilitaryFlightLayer`. It uses the
 same normalized observation contract as civil flights, with separate military
 classification, styling, model and tracking policy. Each instance owns its
 contacts, history, scratch objects, model loads and cancellation lifetime.
@@ -1851,7 +1851,7 @@ Applications supply the existing scene services and resolve model asset URLs;
 A source may retain a bounded stale-status reason; the standalone cached-feed
 behavior remains unchanged.
 
-`gods-eye-view/aircraft` exports the existing shared classification, icon,
+`orbital-watch/aircraft` exports the existing shared classification, icon,
 metadata, motion, altitude, model-anchor, proximity and selection calculations.
 It also exports `createMilitaryRegistry`, an explicitly constructed owner for
 known military identities and active-layer transitions. Its optional background
@@ -1864,7 +1864,7 @@ starts no network request. Both standalone aircraft layers use one registry.
 
 ## Civil-flight components
 
-`gods-eye-view/layers/flights` exports `createCivilFlightLayer`. Each instance
+`orbital-watch/layers/flights` exports `createCivilFlightLayer`. Each instance
 owns its contacts, histories, model collections, scratch objects and lifecycle.
 State, ingestion, enrichment, motion/floor interpolation, rendering, tracking and
 queries live in separate files under `src/layers/flights`. The standalone
@@ -1959,7 +1959,7 @@ and model transitions, Cockpit HUD, clearing and tracking release.
 ## Browser live-source observations
 
 Flights, Military Flights and AIS Vessels obtain snapshots and optional history
-through `gods-eye-view/sources/live`. The standalone adapters use the existing
+through `orbital-watch/sources/live`. The standalone adapters use the existing
 same-origin routes. Aircraft observations distinguish barometric metres from
 WGS84 ellipsoid metres and retain source position/contact epochs; vessel records
 retain separate heading/course and sea-surface datum. History is a best-effort
@@ -2048,7 +2048,7 @@ Scene controls consume playback state and editing outcomes from the director.
 Progress updates carry a small playback snapshot and preserve shot-row identity;
 editing outcomes include a copy of the affected scene or shot. Subscriptions
 start with current state, isolate listener failures and stop on disposal.
-`gods-eye-view/scenes` exports the same director used by the standalone app.
+`orbital-watch/scenes` exports the same director used by the standalone app.
 
 ## UI shell and component ownership
 
@@ -2436,7 +2436,7 @@ picture under the HUD (with passing light streaks, which stop under reduced
 motion), arrow-key look-around when the provider asks for it, and a progress
 line along the bottom edge (`src/cockpitProgress.js`: close ticks merge,
 labels never overlap). Core translates none of the provider's text: a host
-words it for the page's language (`gods-eye-view/i18n`:
+words it for the page's language (`orbital-watch/i18n`:
 `getLocale`, `onLocaleChange`). Its entry face, labels and look may be
 functions, read again when they are shown and on a change of language, as the
 HUD view is.
@@ -2452,7 +2452,7 @@ feed held, clicks and Escape left to the view; the held copy stays the one
 drawn of its train while held, another feed's copy hidden, and it keeps
 moving, still selected, when its category is turned off) and
 `focusTrain(key)` (false for a train the layer does not draw); its pure path
-module is exported as `gods-eye-view/layers/rail/paths`. That export
+module is exported as `orbital-watch/layers/rail/paths`. That export
 and these read APIs are experimental and may change without notice. A snapshot read again while nothing in it changed is
 the one read before, and its `path.line` is a frozen copy. Transit
 offers the same for a vehicle (`getSelectedVehicle`, `getCockpitSubject`,
@@ -3223,8 +3223,8 @@ Local composition now imports separate Node modules for Re:Earth heights,
 TomTom flow tiles, NASA FIRMS detections and GBFS station feeds. Existing routes,
 plugin order, server-key selection, validation, disk caches, budgets, retries
 and stale/error responses remain unchanged. Each has a Node-only package entry
-under `gods-eye-view/server/providers/`. Portable terrain mechanics, traffic tile
-math and GBFS source rules are available under `gods-eye-view/sources/`.
+under `orbital-watch/server/providers/`. Portable terrain mechanics, traffic tile
+math and GBFS source rules are available under `orbital-watch/sources/`.
 The TomTom `/api/tomtom/*` routes run the shared same-site admission gate before
 status, cache or upstream work, refusing cross-site browser requests while
 preserving same-origin app requests and non-browser local callers. The browser
@@ -3290,7 +3290,7 @@ retain their established behavior.
 `server/providers/space/` owns the CelesTrak TLE and Launch Library 2 Node
 proxies. Their routes, six-hour/15-minute caches, disk storage, stale fallback,
 request coalescing and optional LL2 server token retain existing behavior.
-The Node-only `gods-eye-view/server/providers/space` export supplies factories;
+The Node-only `orbital-watch/server/providers/space` export supplies factories;
 `sources/space` supplies fixed upstream URL builders with no I/O or environment
 access. Callers retain validation, transport and response policy.
 
@@ -3318,7 +3318,7 @@ provider families own their middleware and process state in focused modules.
 Provider URLs, key selection, cache behavior, setup restrictions and routes are
 unchanged.
 
-`gods-eye-view/build/vite` is a Node-only export for explicit browser build
+`orbital-watch/build/vite` is a Node-only export for explicit browser build
 settings: Cesium assets, caller-supplied plugins, browser key defines, server
 binding and document/credential protections. It never reads an environment file
 or constructs providers. The standalone caller owns those choices.
@@ -3529,10 +3529,10 @@ the photo's open licence and a link to the vessel's page. A vessel without an
 MMSI is never looked up; a miss stays final for the session, and a failed
 lookup is asked again after five minutes.
 
-`gods-eye-view/server/providers/live` is a Node-only entry for the existing
+`orbital-watch/server/providers/live` is a Node-only entry for the existing
 plugins and shared request helpers. Importing it starts no sockets or timers.
 The existing aircraft normalizer is separately available through the portable
-`gods-eye-view/sources/adsb-lol` export. Provider URLs, local credentials, cache
+`orbital-watch/sources/adsb-lol` export. Provider URLs, local credentials, cache
 policy, fallback behavior, response shapes and rendering remain unchanged.
 
 ## Control names for assistive technology
@@ -7040,7 +7040,7 @@ Public Overpass instances are not used by default. `OVERPASS_UPSTREAMS` is a
 server-only comma-separated list of HTTP(S) instances the operator runs or pays
 for, resolved lazily after env loading. It replaces the empty default list;
 there is no built-in fallback. Local/private instances are allowed. The stable
-`gods-eye-view/…` User-Agent is unchanged. URLs never appear in response headers
+`orbital-watch/…` User-Agent is unchanged. URLs never appear in response headers
 or upstream errors, including old cached endpoint metadata.
 Disk cache entries for both routes carry a SHA-256 tag of the configured
 instance set (order does not matter) and are served only while it matches, so
@@ -7699,7 +7699,7 @@ apply to `public/` assets or built-preview serving.
 - A successful Pinokio install writes the owner-only `pinokio/.installed`
   marker. The nested launcher menu resolves that marker from its own directory:
   an absent marker exposes Install, a present marker exposes Start, and a
-  running server with a captured ready URL exposes Open God's Eye View. That
+  running server with a captured ready URL exposes Open Orbital Watch. That
   default item uses Pinokio's `popout` option to open the system browser; the
   Server item retains the launcher console. The app's framing headers stay
   unchanged. This does not assume all Pinokio desktop versions enforce those
@@ -8778,5 +8778,5 @@ their registered providers at request time and are not included in this data
 file. The additive `/api/cctv/sources` metadata includes provider source links,
 browser-only media links, refresh cadence, and location provenance where
 available. When MLIT serves its recognized adjustment image, `/api/cctv/frame`
-returns a God’s Eye maintenance card and `/api/cctv/health` reports the camera
+returns a Orbital Watch maintenance card and `/api/cctv/health` reports the camera
 as degraded with the provider-adjustment reason.

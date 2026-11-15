@@ -1,6 +1,6 @@
 # Application construction
 
-`gods-eye-view/application` exports `createApplication`. Importing it does not
+`orbital-watch/application` exports `createApplication`. Importing it does not
 create a viewer, discover configuration, start requests, or attach browser
 listeners. Construction is also inactive until the caller invokes `start()`.
 
@@ -20,8 +20,8 @@ interpret provider names, environment variables, endpoints, or module paths.
 There is no module discovery or automatic import mechanism.
 
 ```js
-import { createApplication } from 'gods-eye-view/application';
-import { createApplicationViewer } from 'gods-eye-view/application/viewer';
+import { createApplication } from 'orbital-watch/application';
+import { createApplicationViewer } from 'orbital-watch/application/viewer';
 
 const app = createApplication({
   createScene({ defer }) {
@@ -188,12 +188,12 @@ state restoration, and release them after the consumers stop. The catalog
 constructor (`application/layers`) also requires `wind`, `weather` and
 `cyclones` sources with `getSnapshot` for the Weather layers, and owns the
 observed-history clock those layers share for the catalog's lifetime. That
-clock, the catalog's `weatherClock`, follows the world clock (`gods-eye-view/time`)
+clock, the catalog's `weatherClock`, follows the world clock (`orbital-watch/time`)
 and has no time controls of its own: move time with the world clock's `seek`,
 `play`, `pause` and `goLive` (`weatherClock.world` is the one it follows).
 
 A layer gives the world clock's timeline the time it can show with
-`worldClock.register({ id, coverage })` (`gods-eye-view/time`), which returns
+`worldClock.register({ id, coverage })` (`orbital-watch/time`), which returns
 the unregister; call `worldClock.coverageChanged()` when that time changes.
 `coverage()` returns null while the layer has none, or
 `{ start, end, marks? }` in epoch ms. `marks` are the moments worth going to,
@@ -279,8 +279,8 @@ the last; a worded member (labels, entry face, look) that throws keeps its
 last good words.
 
 ```js
-import { getLocale, onLocaleChange } from 'gods-eye-view/i18n';
-import { pointAtS } from 'gods-eye-view/layers/rail/paths';
+import { getLocale, onLocaleChange } from 'orbital-watch/i18n';
+import { pointAtS } from 'orbital-watch/layers/rail/paths';
 
 const words = {
   en: { view: 'Ride view', exit: 'Exit ride view', exitText: 'EXIT RIDE' },
@@ -342,7 +342,7 @@ createApplicationControls({ /* ... */ services: { cockpitSubjects: [ride] } });
 The `./i18n` entry gives `getLocale()` and `onLocaleChange()`:
 Core translates only its own strings, so a provider words its labels, entry
 face and HUD for the page's language (labels may be functions, as above; the
-HUD is read again on a change). `gods-eye-view/layers/rail/paths` is the
+HUD is read again on a change). `orbital-watch/layers/rail/paths` is the
 Rail layer's pure path module (`createRailPath`, `pointAtS`, `projectOnPath`)
 for a provider placing a train along its line. The frame, HUD view and
 candidate fields are documented in `src/cockpitSubjectProviders.js`; the Rail
