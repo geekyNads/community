@@ -1,6 +1,6 @@
 # Orbital Watch
 
-Orbital Watch is the space situational awareness layer built on God's Eye View.
+Orbital Watch is the space situational awareness layer built on the globe from the God's Eye View project.
 It reads CelesTrak element sets, propagates them with SGP4, screens the catalog
 for close approaches, and explains each result. The globe is the interface. The
 screening engine is the product.

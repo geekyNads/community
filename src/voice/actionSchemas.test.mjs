@@ -56,10 +56,11 @@ test('the complete Realtime tool payload pins the manifest-generated layer relea
     // area scopes and the osm-places layer; natural-region candidates and the
     // tightened area tool wording follow review.
     // control_cockpit states the own-layer entry rule (Contacts not required).
+    // Re-derived for the Orbital Watch rename: prompt and tool description text only.
     // move_camera tilt takes an optional pitchDeg angle, described as
     // absolute with its -45 default, with steps sent as a direction.
     // show_street_level (map, source, photo) adds one tool.
-    '0c27f62062001e6a07241cd301c3d357f55e9b74f66cd2904d16590510337468',
+    '809601a866dfa213f4c71b928b1afeab5a103e2f6a843d6eabac95da9a9b520a',
   );
 });
 

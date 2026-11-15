@@ -1,6 +1,6 @@
 # MCP setup
 
-Use God's Eye View from Claude and Codex: tools, links, and the live globe
+Use Orbital Watch from Claude and Codex: tools, links, and the live globe
 inside the conversation. Agents: follow these steps in order and check each
 one before going on.
 
@@ -51,7 +51,7 @@ args = ["/abs/path/gods-eye-view/server/mcp/stdio.js", "--api-base", "http://loc
 
 Fully quit the client (on Windows, from the tray icon) and reopen it, then
 start a new chat; clients keep the server they started with. Ask: *"Show San
-Diego in God's Eye View with military flights on."*
+Diego in Orbital Watch with military flights on."*
 
 - Claude Desktop (a chat, not the Code tab), Codex and ChatGPT desktop show
   the live globe; the first load takes 10–20 seconds.
